@@ -11,6 +11,7 @@ uglifyjs = require('gulp-uglify')
 filter = require('gulp-filter')
 bower = require('main-bower-files')
 args = require('yargs').argv
+browserSync = require('browser-sync').create()
 
 jsFilter = filter('*.js')
 cssFilter = filter('*.css')
@@ -54,11 +55,24 @@ gulp.task 'bower', ->
   .pipe(concat('vendor.css'))
   .pipe(gulp.dest('./public/css'))
 
-gulp.task 'build', ['bower', 'coffee', 'stylus', 'jade']
+gulp.task 'images', ->
+  gulp.src('./app/img/**/*')
+  .pipe(gulp.dest('./public/img'))
+
+gulp.task 'build', ['bower', 'coffee', 'stylus', 'jade', 'images']
+
+gulp.task 'browser-sync', ->
+  browserSync.init {
+    server: {
+        baseDir: "./public/"
+    }
+  }
 
 gulp.task 'watch', ->
   gulp.run('build')
+  gulp.run('browser-sync')
   gulp.watch('./app/js/*.coffee', ['coffee'])
   gulp.watch('./app/css/*.styl', ['stylus'])
   gulp.watch('./app/**/*.jade', ['jade'])
   gulp.watch('./bower_components/*', ['bower'])
+  gulp.watch('./app/img/**/*', ['img'])
