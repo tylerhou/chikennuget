@@ -20,7 +20,7 @@ queue.on('complete', ->
 
   images = ('./img/nuggets/png/nugget' + nugget + '.png' for nugget in [1..5])
 
-  circles = (new Circle(stage, randPoint(), randVector(), 50*Math.random()+40, 'red', queue.getResult(imageURis[~~(Math.random()*5)])) for i in [0...35])
+  circles = (new Circle(stage, randPoint(), randVector(), 40*Math.random()+20, 'red', queue.getResult(imageURis[~~(Math.random()*5)])) for i in [0...75])
   for circle in circles
     circle.setColor(colors[~~(Math.random()*colors.length)])
     circle.draw()

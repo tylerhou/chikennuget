@@ -199,8 +199,8 @@ queue.on('complete', function() {
   circles = (function() {
     var k, results;
     results = [];
-    for (i = k = 0; k < 35; i = ++k) {
-      results.push(new Circle(stage, randPoint(), randVector(), 50 * Math.random() + 40, 'red', queue.getResult(imageURis[~~(Math.random() * 5)])));
+    for (i = k = 0; k < 75; i = ++k) {
+      results.push(new Circle(stage, randPoint(), randVector(), 40 * Math.random() + 20, 'red', queue.getResult(imageURis[~~(Math.random() * 5)])));
     }
     return results;
   })();
