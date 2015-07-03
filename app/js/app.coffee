@@ -7,7 +7,7 @@ queue.on('complete', ->
   $('#flowcanvas').attr('height', $(window).height().toString())
   stage = new createjs.Stage('flowcanvas')
   randPoint = -> new Point(Math.random()*$(window).width(), Math.random()*$(window).height())
-  randVector = -> new Vector(2000*(Math.random()-.5), 2000*(Math.random()-.5))
+  randVector = -> new Vector(1000*(Math.random()-.5), 1000*(Math.random()-.5))
   colors = []
   #colors = colors.concat('rgb(' + (45*i+40) + ',0,0)' for i in [0..5]) # red
   #colors = colors.concat('rgb(0,' + (45*i+40) + ',0)' for i in [0..5]) # green
@@ -20,7 +20,8 @@ queue.on('complete', ->
 
   images = ('./img/nuggets/png/nugget' + nugget + '.png' for nugget in [1..5])
 
-  circles = (new Circle(stage, randPoint(), randVector(), 40*Math.random()+20, 'red', queue.getResult(imageURis[~~(Math.random()*5)])) for i in [0...75])
+  circleNum = ~~($(window).width() * $(window).height() / 13000)
+  circles = (new Circle(stage, randPoint(), randVector(), 40*Math.random()+20, 'red', queue.getResult(imageURis[~~(Math.random()*5)])) for i in [0...circleNum])
   for circle in circles
     circle.setColor(colors[~~(Math.random()*colors.length)])
     circle.draw()

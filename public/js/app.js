@@ -164,7 +164,7 @@ for (j = 0, len = imageURis.length; j < len; j++) {
 }
 
 queue.on('complete', function() {
-  var circle, circles, collide, collideTime, colors, frame, getImage, i, images, k, len1, randPoint, randVector, stage;
+  var circle, circleNum, circles, collide, collideTime, colors, frame, getImage, i, images, k, len1, randPoint, randVector, stage;
   $('#flowcanvas').attr('width', $(window).width().toString());
   $('#flowcanvas').attr('height', $(window).height().toString());
   stage = new createjs.Stage('flowcanvas');
@@ -172,7 +172,7 @@ queue.on('complete', function() {
     return new Point(Math.random() * $(window).width(), Math.random() * $(window).height());
   };
   randVector = function() {
-    return new Vector(2000 * (Math.random() - .5), 2000 * (Math.random() - .5));
+    return new Vector(1000 * (Math.random() - .5), 1000 * (Math.random() - .5));
   };
   colors = [];
   colors = colors.concat((function() {
@@ -196,10 +196,11 @@ queue.on('complete', function() {
     }
     return results;
   })();
+  circleNum = ~~($(window).width() * $(window).height() / 13000);
   circles = (function() {
-    var k, results;
+    var k, ref, results;
     results = [];
-    for (i = k = 0; k < 75; i = ++k) {
+    for (i = k = 0, ref = circleNum; 0 <= ref ? k < ref : k > ref; i = 0 <= ref ? ++k : --k) {
       results.push(new Circle(stage, randPoint(), randVector(), 40 * Math.random() + 20, 'red', queue.getResult(imageURis[~~(Math.random() * 5)])));
     }
     return results;
